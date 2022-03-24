@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocBuilder<HomeFeedBloc, HomeFeedState>(builder: (context, state) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Swap"),
+          title: Text("Roomr"),
           backgroundColor: Colors.blue,
           centerTitle: true,
         ),

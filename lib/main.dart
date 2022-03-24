@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: GetMaterialApp(
-          title: 'Swap',
+          title: 'Roomr',
           navigatorObservers: [
             //FirebaseAnalyticsObserver(analytics: analytics),
           ],

@@ -23,7 +23,6 @@ class ListingComposeBloc
 
   ListingComposeBloc() : super(ListingComposeInitial()) {
     this.placesService = Get.find();
-    //this.locationService = getIt<LocationService>();
     this.dataService = Get.find();
 
     on<SearchAddresses>((event, emit) async {

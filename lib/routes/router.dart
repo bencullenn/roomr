@@ -14,7 +14,7 @@ import 'package:roomr/screens/root_page.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case AppRoutes.home:
-      return _getPageRoute(RootPage(title: "Swap"));
+      return _getPageRoute(RootPage(title: "Roomr"));
     case AppRoutes.login:
       return _getPageRoute(LoginScreen());
     case AppRoutes.createAccount:
@@ -34,7 +34,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AppRoutes.listingDetails:
       return _getPageRoute(ListingDetailScreen());
     default:
-      return _getPageRoute(RootPage(title: "Swap"));
+      return _getPageRoute(RootPage(title: "Roomr"));
   }
 }
 

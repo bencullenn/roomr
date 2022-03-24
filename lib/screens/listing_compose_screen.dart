@@ -147,7 +147,7 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
       } else if (state is ListingUploadSuccess) {
         Navigator.pop(context);
         _showSuccessDialog('Listing Uploaded',
-            'We are looking for your matches. We\'ll send you a notification when they\'re ready.');
+            'Your listing is now live on Roomr!');
       } else if (state is AuthenticatingUser) {
         Get.toNamed(AppRoutes.authSelect,
             arguments: AuthScreenSettings(
@@ -389,31 +389,6 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                               });
                             }),
                         padding: EdgeInsets.fromLTRB(10, 5, 10, 5)),
-                    Row(
-                      children: [
-                        Padding(
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 20),
-                              ),
-                              onPressed: () {
-                                _showInstantNotifyDialog();
-                              },
-                              child: Icon(Icons.info),
-                            ),
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
-                        Padding(
-                            child: CheckboxWidget(
-                                title: 'Instant Notify',
-                                updateFunction: (value) {
-                                  setState(() {
-                                    this.instantNotify = value;
-                                  });
-                                },
-                                initialValue: instantNotify),
-                            padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
-                      ],
-                    ),
                     Padding(
                         child: TextFormField(
                           decoration: InputDecoration(
@@ -484,12 +459,6 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                         )),
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),
                     Padding(
-                        child: Center(
-                            child: Text(
-                          'More detailed listings get more matches',
-                        )),
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),
-                    Padding(
                         child: PickerWidget(
                             title: 'Parking Type: ',
                             valueList: parkingOptions,
@@ -509,31 +478,6 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                               });
                             }),
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),
-                    /*Padding(
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Deposit Amount'),
-                controller: depositController,
-              ),
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),*/
-                    /*Padding(
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Incentive'),
-                controller: incentiveController,
-              ),
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),*/
-                    /*Padding(
-              child: CheckboxWidget(
-                title: 'BYU Approved',
-                updateFunction: (value) {
-                  setState(() {
-                    this.BYUApproved = value;
-                  });
-                },
-                initialValue: false,
-              ),
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),*/
                     Padding(
                         child: CheckboxWidget(
                             title: 'Air Conditioning',
@@ -850,15 +794,6 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
         });
   }
 
-  showMatchingListingDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return LoadingDialogWidget("Matching Listing");
-        });
-  }
-
   Future<void> _showSuccessDialog(String title, String content) async {
     return showDialog<void>(
       context: context,
@@ -903,34 +838,6 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
           actions: <Widget>[
             TextButton(
               child: const Text('Okay'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> _showInstantNotifyDialog() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Instant Notify"),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text(
-                    "Get notified in real time when matching search posts are uploaded"),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Dismiss'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
