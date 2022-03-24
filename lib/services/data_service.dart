@@ -573,15 +573,28 @@ class DataService {
       //filter by parking, room type, and availability date on device
       for (QueryDocumentSnapshot<Listing> listing in listingDocs) {
         print(listing.data().toJson());
+        if (parkingTypes.contains(listing.data().parkingType) &&
+            roomTypes.contains(listing.data().roomType) &&
+            laundryTypes.contains(listing.data().laundryType)) {
+          if (filters.startAvailabilityDate != null &&
+              filters.endAvailabilityDate != null &&
+              filters.anyDate == false) {
+            if (listing.data().dateAvailable.millisecondsSinceEpoch <=
+                filters.endAvailabilityDate!.millisecondsSinceEpoch) {
+              filteredListings.add(listing);
+            }
+          } else {
+            filteredListings.add(listing);
+          }
+        }
       }
-
-      print('Listing list size:' + filteredListings.length.toString());
-      for (QueryDocumentSnapshot<Listing> listing in filteredListings) {
-        print(listing.data().toJson());
-      }
-      return filteredListings;
     }
-    return [];
+
+    print('Listing list size:' + filteredListings.length.toString());
+    for (QueryDocumentSnapshot<Listing> listing in filteredListings) {
+      print(listing.data().toJson());
+    }
+    return filteredListings;
   }
 
   Future<List<QueryDocumentSnapshot<Listing>>> getFeaturedListings() async {

@@ -214,6 +214,11 @@ class _ListingFeedScreenState extends State<ListingFeedScreen> {
           state is PlacesLoadError ||
           state is PlacesLoadSuccess) {
         return Scaffold(
+            appBar: AppBar(
+              title: Text("Listings"),
+              backgroundColor: Colors.blue,
+              centerTitle: true,
+            ),
             body: Column(children: [
           TextField(
             decoration: InputDecoration(
