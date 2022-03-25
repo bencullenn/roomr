@@ -10,17 +10,16 @@ import 'package:roomr/services/data_service.dart';
 import 'package:roomr/services/places_service.dart';
 
 part 'listing_edit_event.dart';
+
 part 'listing_edit_state.dart';
 
 class ListingEditBloc extends Bloc<ListingEditEvent, ListingEditState> {
   late final PlacesService placesService;
 
-  //late final LocationService locationService;
   late final DataService dataService;
 
   ListingEditBloc() : super(ListingEditInitial()) {
     this.placesService = Get.find();
-    //this.locationService = getIt<LocationService>();
     this.dataService = Get.find();
 
     on<SearchAddressesEditing>((event, emit) async {

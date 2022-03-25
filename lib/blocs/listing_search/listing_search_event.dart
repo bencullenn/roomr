@@ -3,7 +3,7 @@ part of 'listing_search_bloc.dart';
 @immutable
 abstract class ListingSearchEvent {}
 
-class LoadListingsWithFilters extends ListingSearchEvent{
+class LoadListingsWithFilters extends ListingSearchEvent {
   final ListingFilterSettings? filters;
   final Place? location;
 
@@ -13,10 +13,11 @@ class LoadListingsWithFilters extends ListingSearchEvent{
   List<Object?> get props => [filters, location];
 
   @override
-  String toString() => 'LoadListingsWithFilters { Filters: $filters, Location: $location }';
+  String toString() =>
+      'LoadListingsWithFilters { Filters: $filters, Location: $location }';
 }
 
-class LocationSelected extends ListingSearchEvent{
+class LocationSelected extends ListingSearchEvent {
   final String placeId;
 
   LocationSelected(this.placeId);
@@ -28,7 +29,7 @@ class LocationSelected extends ListingSearchEvent{
   String toString() => 'LocationSelected { Place ID: $placeId }';
 }
 
-class SearchPlaces extends ListingSearchEvent{
+class SearchPlaces extends ListingSearchEvent {
   final String query;
 
   SearchPlaces(this.query);

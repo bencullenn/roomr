@@ -8,6 +8,7 @@ import 'package:roomr/services/data_service.dart';
 import 'package:get/get.dart';
 
 part 'account_edit_event.dart';
+
 part 'account_edit_state.dart';
 
 class AccountEditBloc extends Bloc<AccountEditEvent, AccountEditState> {
@@ -72,7 +73,7 @@ class AccountEditBloc extends Bloc<AccountEditEvent, AccountEditState> {
       } else {
         this.add(ShowLoadError(
             message:
-            "An account could not be found for the current user. \n Please try logging in and out or contact customer support."));
+                "An account could not be found for the current user. \n Please try logging in and out or contact customer support."));
       }
     });
   }

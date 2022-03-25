@@ -5,7 +5,7 @@ abstract class AppSettingsState {}
 
 class AppSettingsInitial extends AppSettingsState {}
 
-class UnknownAuthStatus extends AppSettingsState{}
+class UnknownAuthStatus extends AppSettingsState {}
 
 class Authenticated extends AppSettingsState {
   final Account? currentAccount;

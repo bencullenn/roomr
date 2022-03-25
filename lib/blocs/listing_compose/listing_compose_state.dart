@@ -28,7 +28,7 @@ class AddressLoadSuccess extends ListingComposeState {
 class AddressUpdated extends ListingComposeState {
   final Place? address;
 
-   AddressUpdated(this.address);
+  AddressUpdated(this.address);
 
   @override
   List<Object?> get props => [address];
@@ -41,10 +41,10 @@ class ListingUploadSuccess extends ListingComposeState {}
 class ListingUploadError extends ListingComposeState {
   final String errorMessage;
 
-   ListingUploadError(this.errorMessage);
+  ListingUploadError(this.errorMessage);
 
   @override
   List<Object?> get props => [errorMessage];
 }
 
-class AuthenticatingUser extends ListingComposeState{}
+class AuthenticatingUser extends ListingComposeState {}

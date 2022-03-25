@@ -10,6 +10,7 @@ import 'package:roomr/services/data_service.dart';
 import 'package:roomr/global_state/auth_state.dart';
 
 part 'app_settings_event.dart';
+
 part 'app_settings_state.dart';
 
 class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
@@ -27,7 +28,7 @@ class AppSettingsBloc extends Bloc<AppSettingsEvent, AppSettingsState> {
     on<AuthStatusChanged>((event, emit) async {
       if (event.user != null) {
         Account? account =
-        await dataService.getAccountForUserId(event.user!.uid);
+            await dataService.getAccountForUserId(event.user!.uid);
         print("Found Account:" + account.toString());
         if (account != null) {
           authState.isAuthenticated = true;

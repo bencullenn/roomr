@@ -3,7 +3,7 @@ part of 'login_bloc.dart';
 @immutable
 abstract class LoginEvent {}
 
-class LogInEmail extends LoginEvent{
+class LogInEmail extends LoginEvent {
   final String email;
   final String password;
 
@@ -16,4 +16,4 @@ class LogInEmail extends LoginEvent{
   String toString() => 'LogInEmail { Email: $email }';
 }
 
-class LogOut extends LoginEvent{}
+class LogOut extends LoginEvent {}

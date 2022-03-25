@@ -3,13 +3,13 @@ part of 'home_feed_bloc.dart';
 @immutable
 abstract class HomeFeedEvent {}
 
-class LoadFeaturedListings extends HomeFeedEvent{}
+class LoadFeaturedListings extends HomeFeedEvent {}
 
-class ShowFeaturedListings extends HomeFeedEvent{}
+class ShowFeaturedListings extends HomeFeedEvent {}
 
-class SearchHomeLocations extends HomeFeedEvent{}
+class SearchHomeLocations extends HomeFeedEvent {}
 
-class HomeLocationSelected extends HomeFeedEvent{
+class HomeLocationSelected extends HomeFeedEvent {
   final String placeId;
 
   HomeLocationSelected(this.placeId);
@@ -21,7 +21,7 @@ class HomeLocationSelected extends HomeFeedEvent{
   String toString() => 'HomeLocationSelected { Place ID: $placeId }';
 }
 
-class SearchHomePlaces extends HomeFeedEvent{
+class SearchHomePlaces extends HomeFeedEvent {
   final String query;
 
   SearchHomePlaces(this.query);

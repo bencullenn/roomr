@@ -9,6 +9,7 @@ import 'package:roomr/model/place.dart';
 import 'package:roomr/services/data_service.dart';
 
 part 'home_feed_event.dart';
+
 part 'home_feed_state.dart';
 
 class HomeFeedBloc extends Bloc<HomeFeedEvent, HomeFeedState> {
@@ -21,8 +22,7 @@ class HomeFeedBloc extends Bloc<HomeFeedEvent, HomeFeedState> {
       print("Loading Featured Listings");
       emit(FeaturedListingLoadInProgress());
       print("Getting featured listings");
-      emit(FeaturedListingLoadSuccess(
-          await dataService.getFeaturedListings()));
+      emit(FeaturedListingLoadSuccess(await dataService.getFeaturedListings()));
       print("Featured listings returned");
     });
   }

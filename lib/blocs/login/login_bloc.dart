@@ -7,6 +7,7 @@ import 'package:roomr/global_state/auth_state.dart';
 import 'package:roomr/services/auth_service.dart';
 
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -20,7 +21,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LogInEmail>((event, emit) async {
       print('Logging in');
       String message =
-      await authService.logInWithEmail(event.email, event.password);
+          await authService.logInWithEmail(event.email, event.password);
       print('Log In message:' + message);
       if (message == 'Success') {
         print('Sending login success');

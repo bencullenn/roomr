@@ -12,6 +12,7 @@ import 'package:roomr/services/data_service.dart';
 import 'package:roomr/services/places_service.dart';
 
 part 'listing_search_event.dart';
+
 part 'listing_search_state.dart';
 
 class ListingSearchBloc extends Bloc<ListingSearchEvent, ListingSearchState> {

@@ -3,7 +3,7 @@ part of 'app_settings_bloc.dart';
 @immutable
 abstract class AppSettingsEvent {}
 
-class AuthStatusChanged extends AppSettingsEvent{
+class AuthStatusChanged extends AppSettingsEvent {
   final User? user;
 
   AuthStatusChanged(this.user);
@@ -15,4 +15,4 @@ class AuthStatusChanged extends AppSettingsEvent{
   String toString() => 'AuthStatusChanged { User: $user }';
 }
 
-class AuthLogoutRequested extends AppSettingsEvent{}
+class AuthLogoutRequested extends AppSettingsEvent {}

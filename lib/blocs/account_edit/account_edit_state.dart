@@ -14,8 +14,7 @@ class AccountLoaded extends AccountEditState {
   List<Object?> get props => [account];
 }
 
-class AccountLoadError extends AccountEditState {
-}
+class AccountLoadError extends AccountEditState {}
 
 class AccountUpdateInProgress extends AccountEditState {}
 
@@ -36,4 +35,3 @@ class AccountUpdateError extends AccountEditState {
   @override
   List<Object?> get props => [errorMessage];
 }
-
