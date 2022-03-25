@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:roomr/model/listing_filter_settings.dart';
-import 'package:roomr/screens/checkbox_widget.dart';
+import 'package:roomr/widgets/checkbox_widget.dart';
 import 'package:roomr/widgets/price_range_widget.dart';
 
 class ListingFiltersScreen extends StatefulWidget {
@@ -458,7 +458,6 @@ class _ListingFiltersScreenState extends State<ListingFiltersScreen> {
 
   void _updateDetails(ListingFilterSettings args) {
     if (dataUpdated == false) {
-      //this.byuApproved;
       this.hasAC = args.hasAirConditioning ?? false;
       this.petsAllowed = args.petsAllowed ?? false;
       this.hasDishwasher = args.hasDishwasher ?? false;

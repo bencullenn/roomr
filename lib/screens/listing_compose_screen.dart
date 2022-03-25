@@ -19,7 +19,7 @@ import 'package:roomr/model/auth_screen_settings.dart';
 import 'package:roomr/model/place.dart';
 import 'package:roomr/model/place_search.dart';
 import 'package:roomr/routes/routes.dart';
-import 'package:roomr/screens/checkbox_widget.dart';
+import 'package:roomr/widgets/checkbox_widget.dart';
 import 'package:roomr/widgets/loading_dialog_widget.dart';
 import 'package:roomr/widgets/picker_widget.dart';
 
@@ -146,8 +146,8 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
             'Upload Error', 'Error uploading listing:' + state.errorMessage);
       } else if (state is ListingUploadSuccess) {
         Navigator.pop(context);
-        _showSuccessDialog('Listing Uploaded',
-            'Your listing is now live on Roomr!');
+        _showSuccessDialog(
+            'Listing Uploaded', 'Your listing is now live on Roomr!');
       } else if (state is AuthenticatingUser) {
         Get.toNamed(AppRoutes.authSelect,
             arguments: AuthScreenSettings(
@@ -166,7 +166,7 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                 child: Column(
                   children: [
                     if (_imageMobileFileList != null &&
-                            _imageMobileFileList!.length > 0)
+                        _imageMobileFileList!.length > 0)
                       Padding(
                           child: _previewImages(),
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),
@@ -179,8 +179,7 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                               onTap: () {
                                 debugPrint('Received upload click');
 
-                                  _showPhotoPicker(context);
-
+                                _showPhotoPicker(context);
                               },
                               child: Card(
                                 child: Column(
@@ -212,7 +211,7 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                                 shadowColor: Colors.black,
                               ))),
                     if ((_imageMobileFileList != null &&
-                            _imageMobileFileList!.length > 0))
+                        _imageMobileFileList!.length > 0))
                       Padding(
                           child: OutlinedButton(
                             style: ButtonStyle(
@@ -221,7 +220,7 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                             ),
                             onPressed: () {
                               debugPrint('Received upload click');
-                                _showPhotoPicker(context);
+                              _showPhotoPicker(context);
                             },
                             child: Text(
                               'Replace photos',
@@ -568,7 +567,7 @@ class _ComposeListingScreenState extends State<ComposeListingScreen> {
                             debugPrint('Received upload post click');
                             if (_formKey.currentState!.validate()) {
                               if ((_imageMobileFileList != null &&
-                                      _imageMobileFileList!.length > 0)) {
+                                  _imageMobileFileList!.length > 0)) {
                                 FocusScopeNode currentFocus =
                                     FocusScope.of(context);
 

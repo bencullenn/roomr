@@ -14,9 +14,9 @@ class ListingCardWidget extends StatelessWidget {
 
   ListingCardWidget(
       {required this.listingData,
-        required this.editable,
-        required this.listingId,
-        this.popUntilScreen = "/"});
+      required this.editable,
+      required this.listingId,
+      this.popUntilScreen = "/"});
 
   Widget build(BuildContext context) {
     return InkWell(
@@ -35,17 +35,19 @@ class ListingCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if(this.listingData.status == 'Pending' || this.listingData.status == 'Sold') Center(
-                  child: Padding(
-                    child: Text(
-                      "Status:" + this.listingData.status,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                  )),
+              if (this.listingData.status == 'Pending' ||
+                  this.listingData.status == 'Sold')
+                Center(
+                    child: Padding(
+                  child: Text(
+                    "Status:" + this.listingData.status,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                )),
               Container(
                 child: Image(
                   image: NetworkImage(this.listingData.photos[0]),
@@ -58,33 +60,33 @@ class ListingCardWidget extends StatelessWidget {
                   Expanded(
                       child: Center(
                           child: Padding(
-                            child: Text(
-                              this.listingData.formattedAddress,
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                            ),
-                            padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                          ))),
+                    child: Text(
+                      this.listingData.formattedAddress,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  ))),
                   Expanded(
                       child: Center(
                           child: Padding(
-                            child: Text(
-                              '\$' + this.listingData.rent.toString(),
-                              textAlign: TextAlign.center,
-                            ),
-                            padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                          ))),
+                    child: Text(
+                      '\$' + this.listingData.rent.toString(),
+                      textAlign: TextAlign.center,
+                    ),
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  ))),
                   Expanded(
                       child: Center(
                           child: Padding(
-                            child: Text(
-                                'Available \n' +
-                                    DateFormat('MM-dd-yyyy').format(
-                                        this.listingData.dateAvailable.toDate()),
-                                textAlign: TextAlign.center),
-                            padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                          ))),
+                    child: Text(
+                        'Available \n' +
+                            DateFormat('MM-dd-yyyy').format(
+                                this.listingData.dateAvailable.toDate()),
+                        textAlign: TextAlign.center),
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  ))),
                 ],
               ),
             ],

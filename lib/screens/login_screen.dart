@@ -22,7 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final authSettings =
         ModalRoute.of(context)!.settings.arguments as AuthScreenSettings;
 
-    //print('Return Screen:' + returnScreen);
     print('Route:' + ModalRoute.of(context).toString());
     return BlocConsumer<LoginBloc, LoginState>(listener: (context, state) {
       print('State:' + state.toString());

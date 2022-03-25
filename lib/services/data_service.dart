@@ -12,7 +12,6 @@ import 'package:roomr/model/address.dart';
 import 'package:roomr/model/geometry.dart';
 import 'package:roomr/model/listing.dart';
 import 'package:roomr/model/listing_filter_settings.dart';
-import 'package:roomr/model/listing_report.dart';
 import 'package:roomr/model/location.dart';
 import 'package:roomr/model/place.dart';
 import 'package:uuid/uuid.dart';
@@ -33,13 +32,6 @@ class DataService {
             toFirestore: (account, _) => account.toJson(),
           );
 
-  final listingReportRef = FirebaseFirestore.instance
-      .collection('listing_reports')
-      .withConverter<ListingReport>(
-        fromFirestore: (snapshot, _) =>
-            ListingReport.fromJson(snapshot.data()!),
-        toFirestore: (listingReport, _) => listingReport.toJson(),
-      );
 
 
   ///Listing Functions

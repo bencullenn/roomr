@@ -21,7 +21,7 @@ import 'package:roomr/model/edit_listing_args.dart';
 import 'package:roomr/model/place.dart';
 import 'package:roomr/model/place_search.dart';
 import 'package:roomr/routes/routes.dart';
-import 'package:roomr/screens/checkbox_widget.dart';
+import 'package:roomr/widgets/checkbox_widget.dart';
 import 'package:roomr/widgets/loading_dialog_widget.dart';
 
 class ListingEditScreen extends StatefulWidget {
@@ -88,7 +88,7 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
   @override
   Widget build(BuildContext context) {
     final args = Get.arguments;
-    if(args != null){
+    if (args != null) {
       _updateDetails(args);
     }
 
@@ -129,7 +129,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
     }, builder: (context, state) {
       return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Listing', style:  Theme.of(context).textTheme.headline6),
+            title: Text('Edit Listing',
+                style: Theme.of(context).textTheme.headline6),
             leading: Builder(
               builder: (BuildContext context) {
                 return TextButton(
@@ -186,11 +187,13 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                               fontWeight: FontWeight.bold, fontSize: 18.00),
                         ),
                         padding: EdgeInsets.fromLTRB(10, 20, 10, 30)),
-                    if (_imageMobileFileList != null && _imageMobileFileList!.length > 0)
+                    if (_imageMobileFileList != null &&
+                        _imageMobileFileList!.length > 0)
                       Padding(
                           child: _previewImages(),
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),
-                    if (_imageMobileFileList == null || _imageMobileFileList!.length == 0)
+                    if (_imageMobileFileList == null ||
+                        _imageMobileFileList!.length == 0)
                       Container(
                           padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
                           alignment: Alignment.center,
@@ -198,7 +201,7 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                               splashColor: Colors.blue.withAlpha(30),
                               onTap: () {
                                 debugPrint('Received upload click');
-                                  _showPhotoPicker(context);
+                                _showPhotoPicker(context);
                                 setState(() {
                                   this.changePhotos = true;
                                 });
@@ -232,7 +235,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                                 color: Colors.blueGrey,
                                 shadowColor: Colors.black,
                               ))),
-                    if (_imageMobileFileList != null && _imageMobileFileList!.length > 0)
+                    if (_imageMobileFileList != null &&
+                        _imageMobileFileList!.length > 0)
                       Padding(
                           child: OutlinedButton(
                             style: ButtonStyle(
@@ -241,7 +245,7 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                             ),
                             onPressed: () {
                               debugPrint('Received upload click');
-                                _showPhotoPicker(context);
+                              _showPhotoPicker(context);
                             },
                             child: Text(
                               'Re-Select Photos',
@@ -432,7 +436,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                                 });
                               },
                               items: listingStatusOptions
-                                  .map<DropdownMenuItem<String>>((String value) {
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -459,8 +464,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                                   roomType = newValue!;
                                 });
                               },
-                              items: roomOptions
-                                  .map<DropdownMenuItem<String>>((String value) {
+                              items: roomOptions.map<DropdownMenuItem<String>>(
+                                  (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -488,7 +493,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                                 });
                               },
                               items: contractOptions
-                                  .map<DropdownMenuItem<String>>((String value) {
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -613,7 +619,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                                 });
                               },
                               items: parkingOptions
-                                  .map<DropdownMenuItem<String>>((String value) {
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -640,8 +647,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                                   laundryType = newValue!;
                                 });
                               },
-                              items: laundryTypes
-                                  .map<DropdownMenuItem<String>>((String value) {
+                              items: laundryTypes.map<DropdownMenuItem<String>>(
+                                  (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -809,26 +816,26 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
     if (dataUpdated == false) {
       this.description = args.listingData.description;
       this.listingId = args.listingId;
-      this.hasAC =  args.listingData.hasAC;
-      this.hasHotTub =  args.listingData.hasHotTub;
-      this.hasPool =  args.listingData.hasPool;
-      this.hasGym =  args.listingData.hasGym;
-      this.hasDishwasher =  args.listingData.hasDishwasher;
-      this.hasWifi =  args.listingData.hasWifi;
-      this.isFurnished =  args.listingData.isFurnished;
-      this.petsAllowed =  args.listingData.petsAllowed;
-      this.roomType =  args.listingData.roomType;
-      this.parkingType =  args.listingData.parkingType;
-      this.contractType =  args.listingData.contractType;
-      this.laundryType =  args.listingData.laundryType;
-      this.address =  args.listingData.formattedAddress;
-      addressController.text =  args.listingData.formattedAddress;
-      this.rent =  args.listingData.rent.toString();
-      this.utilities =  args.listingData.utilities.toString();
-      this.incentive =  args.listingData.incentive;
-      this.bathAmt =  args.listingData.bathroomCount.toString();
-      this.bedAmt =  args.listingData.bedroomCount.toString();
-      this.availableDate =  args.listingData.dateAvailable.toDate();
+      this.hasAC = args.listingData.hasAC;
+      this.hasHotTub = args.listingData.hasHotTub;
+      this.hasPool = args.listingData.hasPool;
+      this.hasGym = args.listingData.hasGym;
+      this.hasDishwasher = args.listingData.hasDishwasher;
+      this.hasWifi = args.listingData.hasWifi;
+      this.isFurnished = args.listingData.isFurnished;
+      this.petsAllowed = args.listingData.petsAllowed;
+      this.roomType = args.listingData.roomType;
+      this.parkingType = args.listingData.parkingType;
+      this.contractType = args.listingData.contractType;
+      this.laundryType = args.listingData.laundryType;
+      this.address = args.listingData.formattedAddress;
+      addressController.text = args.listingData.formattedAddress;
+      this.rent = args.listingData.rent.toString();
+      this.utilities = args.listingData.utilities.toString();
+      this.incentive = args.listingData.incentive;
+      this.bathAmt = args.listingData.bathroomCount.toString();
+      this.bedAmt = args.listingData.bedroomCount.toString();
+      this.availableDate = args.listingData.dateAvailable.toDate();
       this.listingStatus = args.listingData.status;
       this.popUntilScreen = args.popUntilScreen;
       this.oldImageLinks = args.listingData.photos.cast<String>();
@@ -841,8 +848,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: availableDate,
-      firstDate:DateTime(
-          DateTime.now().year - 1, DateTime.now().month, DateTime.now().day) ,
+      firstDate: DateTime(
+          DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
       lastDate: DateTime(
           DateTime.now().year + 1, DateTime.now().month, DateTime.now().day),
     );
@@ -987,7 +994,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
           },
         ),
       );
-    } if (_pickImageError != null) {
+    }
+    if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
         textAlign: TextAlign.center,

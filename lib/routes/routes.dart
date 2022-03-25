@@ -1,4 +1,4 @@
-class AppRoutes{
+class AppRoutes {
   static const home = '/';
   static const login = '/login';
   static const createAccount = '/create_account';

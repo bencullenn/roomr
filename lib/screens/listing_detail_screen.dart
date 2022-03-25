@@ -35,7 +35,7 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
   String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
         .map((e) =>
-    '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
         .join('&');
   }
 
@@ -57,26 +57,25 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
     }
 
     if (account != null) {
-        if (account.prefContactMethod == 'Email') {
-          final Uri emailLaunchUri = Uri(
-            scheme: 'mailto',
-            path: account.email,
-            query: encodeQueryParameters(<String, String>{
-              'subject': 'Question about your Roomr listing'
-            }),
-          );
-          await canLaunch(emailLaunchUri.toString())
-              ? await launch(emailLaunchUri.toString())
-              : _showErrorDialog("Contact Seller Error",
-              "Could not create email link for seller");
-        } else if (account.prefContactMethod == 'Phone Call' ||
-            account.prefContactMethod == 'Text-Message') {
-          _sendSMS("I saw your listing on Roomr. Is it still available?",
-              [account.mobileNumber.substring(1)]);
-        } else {
-          _showErrorDialog("Contact Seller Error",
-              "There was an error getting the seller's information");
-        }
+      if (account.prefContactMethod == 'Email') {
+        final Uri emailLaunchUri = Uri(
+          scheme: 'mailto',
+          path: account.email,
+          query: encodeQueryParameters(
+              <String, String>{'subject': 'Question about your Roomr listing'}),
+        );
+        await canLaunch(emailLaunchUri.toString())
+            ? await launch(emailLaunchUri.toString())
+            : _showErrorDialog("Contact Seller Error",
+                "Could not create email link for seller");
+      } else if (account.prefContactMethod == 'Phone Call' ||
+          account.prefContactMethod == 'Text-Message') {
+        _sendSMS("I saw your listing on Roomr. Is it still available?",
+            [account.mobileNumber.substring(1)]);
+      } else {
+        _showErrorDialog("Contact Seller Error",
+            "There was an error getting the seller's information");
+      }
     } else {
       _showErrorDialog("Contact Seller Error",
           "There was an error getting the seller's information");
@@ -106,158 +105,158 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final args =
-    ModalRoute.of(context)!.settings.arguments as ListingDetailSettings;
+        ModalRoute.of(context)!.settings.arguments as ListingDetailSettings;
 
     _updateDetails(args);
-      return Scaffold(
-          appBar: AppBar(
-              title: Text(listingData.formattedAddress,
-                  style: Theme.of(context).textTheme.headline6),
-              actions: <Widget>[
-                if (editable)
-                  IconButton(
-                    icon: Icon(Icons.mode_edit),
-                    onPressed: () {
-                      print('Edit Button Pressed');
-                      Get.toNamed(AppRoutes.editListing,
-                          arguments: EditListingArguments(
-                              listingId, listingData, popUntilScreen));
-                    },
-                  ),
-              ]),
-          body: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  //minHeight: 50.0,
-                  maxWidth: 500.0,
+    return Scaffold(
+        appBar: AppBar(
+            title: Text(listingData.formattedAddress,
+                style: Theme.of(context).textTheme.headline6),
+            actions: <Widget>[
+              if (editable)
+                IconButton(
+                  icon: Icon(Icons.mode_edit),
+                  onPressed: () {
+                    print('Edit Button Pressed');
+                    Get.toNamed(AppRoutes.editListing,
+                        arguments: EditListingArguments(
+                            listingId, listingData, popUntilScreen));
+                  },
                 ),
-                child: Container(
-                  child: ListView(children: [
-                    Container(
-                      height: 250,
-                      width: 500,
-                      child: CarouselSlider.builder(
-                        itemCount: listingData.photos.length,
-                        carouselController: photoCarouselController,
-                        options: CarouselOptions(
-                          viewportFraction: 0.9,
-                          initialPage: 0,
-                          enableInfiniteScroll: false,
-                          enlargeCenterPage: true,
-                        ),
-                        itemBuilder: (BuildContext context, int itemIndex,
-                            int pageViewIndex) =>
-                            Container(
-                              child: Image(
-                                image: NetworkImage(listingData.photos[itemIndex]),
-                              ),
+            ]),
+        body: Center(
+            child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            //minHeight: 50.0,
+            maxWidth: 500.0,
+          ),
+          child: Container(
+            child: ListView(children: [
+              Container(
+                height: 250,
+                width: 500,
+                child: CarouselSlider.builder(
+                  itemCount: listingData.photos.length,
+                  carouselController: photoCarouselController,
+                  options: CarouselOptions(
+                    viewportFraction: 0.9,
+                    initialPage: 0,
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                  ),
+                  itemBuilder: (BuildContext context, int itemIndex,
+                          int pageViewIndex) =>
+                      Container(
+                    child: Image(
+                      image: NetworkImage(listingData.photos[itemIndex]),
+                    ),
+                  ),
+                ),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      photoCarouselController.previousPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.linear);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.blueGrey,
+                      size: 30.0,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      photoCarouselController.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.linear);
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.blueGrey,
+                      size: 30.0,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: Padding(
+                          child: OutlinedButton(
+                            onPressed: () {
+                              debugPrint('Received contact seller click');
+                              _contactSeller();
+                            },
+                            child: const Text(
+                              'Contact Seller',
+                              style: TextStyle(color: Colors.white),
                             ),
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            photoCarouselController.previousPage(
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.linear);
-                          },
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.blueGrey,
-                            size: 30.0,
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blueGrey)),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            photoCarouselController.nextPage(
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.linear);
-                          },
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.blueGrey,
-                            size: 30.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Padding(
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    debugPrint('Received contact seller click');
-                                    _contactSeller();
-                                  },
-                                  child: const Text(
-                                    'Contact Seller',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          Colors.blueGrey)),
-                                ),
-                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10))),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                  child:
-                                  Text('\$' + listingData.rent.toString() + ' Monthly'),
-                                  padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                ))),
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                    child: Text('Available ' +
-                                        DateFormat('MM-dd-yyyy').format(
-                                            listingData.dateAvailable.toDate())),
-                                    padding: EdgeInsets.fromLTRB(10, 5, 10, 5))))
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                  child: Text(listingData.contractType),
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                ))),
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                    child: Text(listingData.roomType),
-                                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10))))
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                  child: Text(
-                                      listingData.bedroomCount.toString() + ' Bedroom '),
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                ))),
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                  child: Text(
-                                      listingData.bathroomCount.toString() + ' Bathroom'),
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                ))),
-                      ],
-                    ),
-                    listingData.description.length > 0
-                        ? Row(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10))),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                    child:
+                        Text('\$' + listingData.rent.toString() + ' Monthly'),
+                    padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  ))),
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                              child: Text('Available ' +
+                                  DateFormat('MM-dd-yyyy').format(
+                                      listingData.dateAvailable.toDate())),
+                              padding: EdgeInsets.fromLTRB(10, 5, 10, 5))))
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                    child: Text(listingData.contractType),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  ))),
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                              child: Text(listingData.roomType),
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10))))
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                    child:
+                        Text(listingData.bedroomCount.toString() + ' Bedroom '),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  ))),
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                    child: Text(
+                        listingData.bathroomCount.toString() + ' Bathroom'),
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  ))),
+                ],
+              ),
+              listingData.description.length > 0
+                  ? Row(
                       children: [
                         Expanded(
                             child: Center(
@@ -268,12 +267,12 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     padding:
-                                    EdgeInsets.fromLTRB(10, 10, 10, 10))))
+                                        EdgeInsets.fromLTRB(10, 10, 10, 10))))
                       ],
                     )
-                        : Container(),
-                    listingData.description.length > 0
-                        ? Row(
+                  : Container(),
+              listingData.description.length > 0
+                  ? Row(
                       children: [
                         Expanded(
                             child: Center(
@@ -282,110 +281,109 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
                                       child: Text(listingData.description),
                                     ),
                                     padding:
-                                    EdgeInsets.fromLTRB(20, 10, 20, 10))))
+                                        EdgeInsets.fromLTRB(20, 10, 20, 10))))
                       ],
                     )
-                        : Container(),
-                    if (showAmenities)
-                      Row(children: [
-                        Expanded(
-                            child: Center(
-                                child: Padding(
-                                    child: Text(
-                                      'Amenities and Features',
-                                      style: TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10))))
-                      ]),
-                    Visibility(
-                        child: Column(
-                          children: [
-                            listingData.hasAC == true
-                                ? ListTile(
+                  : Container(),
+              if (showAmenities)
+                Row(children: [
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                              child: Text(
+                                'Amenities and Features',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10))))
+                ]),
+              Visibility(
+                  child: Column(
+                    children: [
+                      listingData.hasAC == true
+                          ? ListTile(
                               leading: Icon(Icons.ac_unit),
                               title: Text('Air Conditioning'),
                             )
-                                : Container(),
-                            listingData.petsAllowed == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.petsAllowed == true
+                          ? ListTile(
                               leading: Icon(Icons.pets),
                               title: Text('Pets Allowed'),
                             )
-                                : Container(),
-                            listingData.parkingType == 'Off Street'
-                                ? ListTile(
+                          : Container(),
+                      listingData.parkingType == 'Off Street'
+                          ? ListTile(
                               leading: Icon(Icons.directions_car),
                               title: Text('Off Street Parking'),
                             )
-                                : Container(),
-                            listingData.parkingType == 'Street Parking'
-                                ? ListTile(
+                          : Container(),
+                      listingData.parkingType == 'Street Parking'
+                          ? ListTile(
                               leading: Icon(Icons.directions_car),
                               title: Text('Street Parking'),
                             )
-                                : Container(),
-                            listingData.parkingType == 'Garage'
-                                ? ListTile(
+                          : Container(),
+                      listingData.parkingType == 'Garage'
+                          ? ListTile(
                               leading: Icon(Icons.directions_car),
                               title: Text('Garage Parking'),
                             )
-                                : Container(),
-                            listingData.hasGym == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.hasGym == true
+                          ? ListTile(
                               leading: Icon(Icons.directions_run),
                               title: Text('Gym'),
                             )
-                                : Container(),
-                            listingData.hasPool == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.hasPool == true
+                          ? ListTile(
                               leading: Icon(Icons.pool),
                               title: Text('Pool'),
                             )
-                                : Container(),
-                            listingData.hasHotTub == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.hasHotTub == true
+                          ? ListTile(
                               leading: Icon(Icons.hot_tub),
                               title: Text('Hot Tub'),
                             )
-                                : Container(),
-                            listingData.laundryType == "Shared"
-                                ? ListTile(
+                          : Container(),
+                      listingData.laundryType == "Shared"
+                          ? ListTile(
                               leading: Icon(Icons.local_laundry_service),
                               title: Text('Shared Laundry'),
                             )
-                                : Container(),
-                            listingData.laundryType == "In Unit"
-                                ? ListTile(
+                          : Container(),
+                      listingData.laundryType == "In Unit"
+                          ? ListTile(
                               leading: Icon(Icons.local_laundry_service),
                               title: Text('In Unit Laundry'),
                             )
-                                : Container(),
-                            listingData.hasWifi == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.hasWifi == true
+                          ? ListTile(
                               leading: Icon(Icons.wifi),
                               title: Text('Wifi'),
                             )
-                                : Container(),
-                            listingData.hasDishwasher == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.hasDishwasher == true
+                          ? ListTile(
                               leading: Icon(Icons.dining),
                               title: Text('Dishwasher'),
                             )
-                                : Container(),
-                            listingData.isFurnished == true
-                                ? ListTile(
+                          : Container(),
+                      listingData.isFurnished == true
+                          ? ListTile(
                               leading: Icon(Icons.chair_rounded),
                               title: Text('Furnished'),
                             )
-                                : Container(),
-                          ],
-                        ),
-                        visible: showAmenities),
-                  ]),
-                ),
-              )));
+                          : Container(),
+                    ],
+                  ),
+                  visible: showAmenities),
+            ]),
+          ),
+        )));
   }
-
 
   Future<void> _showErrorDialog(String title, String content) async {
     return showDialog<void>(

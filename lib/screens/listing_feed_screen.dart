@@ -220,76 +220,79 @@ class _ListingFeedScreenState extends State<ListingFeedScreen> {
               centerTitle: true,
             ),
             body: Column(children: [
-          TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'Filter by location'),
-            onChanged: (value) => BlocProvider.of<ListingSearchBloc>(context)
-                .add(SearchPlaces(value)),
-          ),
-          TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            ),
-            onPressed: () {
-              debugPrint('Received showing filters click');
-              _getFilters(context);
-            },
-            child: Text('Show More Filters'),
-          ),
-          if (state is PlacesLoadInProgress)
-            Expanded(
-                child: Stack(children: [
-              Container(
-                decoration: BoxDecoration(color: Colors.blueGrey),
+              TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Filter by location'),
+                onChanged: (value) =>
+                    BlocProvider.of<ListingSearchBloc>(context)
+                        .add(SearchPlaces(value)),
               ),
-              Container(
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+              TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                ),
+                onPressed: () {
+                  debugPrint('Received showing filters click');
+                  _getFilters(context);
+                },
+                child: Text('Show More Filters'),
               ),
-              Container(
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.bottomRight,
-                  child: Image.asset(
-                    'assets/powered_by_google_on_non_white@3x.png',
-                    width: 150,
-                  )),
-            ])),
-          if (state is PlacesLoadError)
-            Expanded(
-                child: Container(
+              if (state is PlacesLoadInProgress)
+                Expanded(
+                    child: Stack(children: [
+                  Container(
                     decoration: BoxDecoration(color: Colors.blueGrey),
-                    child: Text('No Locations Found For Search'))),
-          if (state is PlacesLoadSuccess)
-            Expanded(
-              child: Stack(children: [
-                Container(
-                    decoration: BoxDecoration(color: Colors.blueGrey),
-                    child: ListView.builder(
-                        itemCount: state.places!.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(
-                              state.places![index].description,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onTap: () {
-                              BlocProvider.of<ListingSearchBloc>(context).add(
-                                  LocationSelected(
-                                      state.places![index].placeId));
-                            },
-                          );
-                        })),
-                Container(
-                  padding: const EdgeInsets.all(5.0),
-                  alignment: Alignment.bottomRight,
-                  child: Image.asset(
-                    'assets/powered_by_google_on_non_white@3x.png',
-                    width: 150,
                   ),
-                )
-              ]),
-            ),
-        ]));
+                  Container(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+                  Container(
+                      padding: const EdgeInsets.all(5.0),
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        'assets/powered_by_google_on_non_white@3x.png',
+                        width: 150,
+                      )),
+                ])),
+              if (state is PlacesLoadError)
+                Expanded(
+                    child: Container(
+                        decoration: BoxDecoration(color: Colors.blueGrey),
+                        child: Text('No Locations Found For Search'))),
+              if (state is PlacesLoadSuccess)
+                Expanded(
+                  child: Stack(children: [
+                    Container(
+                        decoration: BoxDecoration(color: Colors.blueGrey),
+                        child: ListView.builder(
+                            itemCount: state.places!.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(
+                                  state.places![index].description,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onTap: () {
+                                  BlocProvider.of<ListingSearchBloc>(context)
+                                      .add(LocationSelected(
+                                          state.places![index].placeId));
+                                },
+                              );
+                            })),
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      alignment: Alignment.bottomRight,
+                      child: Image.asset(
+                        'assets/powered_by_google_on_non_white@3x.png',
+                        width: 150,
+                      ),
+                    )
+                  ]),
+                ),
+            ]));
       } else {
         // Default case
         return Scaffold(

@@ -26,64 +26,65 @@ class _CreateSelectScreenState extends State<CreateSelectScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-      return Scaffold(
-        body: Column(children: [
-          Container(height: 50,),
-            Expanded(
-              child: ListView(
-                children: [
-                  Center(
-                      child: Container(
-                          height: 200,
-                          width: 350,
-                          child: InkWell(
-                              splashColor: Colors.blue.withAlpha(30),
-                              onTap: () {
-                                debugPrint('Received create listing click');
-                                if (_authState.isAuthenticated) {
-                                  Get.toNamed(AppRoutes.composeListing);
-                                } else {
-                                  Get.toNamed(
-                                    AppRoutes.authSelect,
-                                    arguments: AuthScreenSettings(
-                                        destinationScreen:
+    return Scaffold(
+      body: Column(children: [
+        Container(
+          height: 50,
+        ),
+        Expanded(
+          child: ListView(
+            children: [
+              Center(
+                  child: Container(
+                      height: 200,
+                      width: 350,
+                      child: InkWell(
+                          splashColor: Colors.blue.withAlpha(30),
+                          onTap: () {
+                            debugPrint('Received create listing click');
+                            if (_authState.isAuthenticated) {
+                              Get.toNamed(AppRoutes.composeListing);
+                            } else {
+                              Get.toNamed(
+                                AppRoutes.authSelect,
+                                arguments: AuthScreenSettings(
+                                    destinationScreen:
                                         AppRoutes.composeListing),
-                                  );
-                                }
-                              },
-                              child: Card(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Padding(
-                                        child: Text(
-                                          "Create a Listing",
-                                          style: TextStyle(
-                                              fontSize: 32,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                        ),
-                                        padding: EdgeInsets.fromLTRB(
-                                            20, 10, 20, 10)),
-                                    Padding(
-                                        child: Icon(Icons.house,
-                                            size: 70, color: Colors.white),
-                                        padding: EdgeInsets.fromLTRB(
-                                            10, 10, 10, 10)),
-                                  ],
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                color: Colors.lightBlue,
-                                shadowColor: Colors.black,
-                              )))),
-                ],
-              ),
-            ),
-        ]),
-      );
+                              );
+                            }
+                          },
+                          child: Card(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                    child: Text(
+                                      "Create a Listing",
+                                      style: TextStyle(
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                    padding:
+                                        EdgeInsets.fromLTRB(20, 10, 20, 10)),
+                                Padding(
+                                    child: Icon(Icons.house,
+                                        size: 70, color: Colors.white),
+                                    padding:
+                                        EdgeInsets.fromLTRB(10, 10, 10, 10)),
+                              ],
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            color: Colors.lightBlue,
+                            shadowColor: Colors.black,
+                          )))),
+            ],
+          ),
+        ),
+      ]),
+    );
   }
 }

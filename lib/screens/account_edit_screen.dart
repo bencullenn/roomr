@@ -26,12 +26,12 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
   void _updateAccount() async {
     try {
       String phoneNumber =
-      await phoneController.text.replaceAll(new RegExp(r'[^0-9]'), '');
+          await phoneController.text.replaceAll(new RegExp(r'[^0-9]'), '');
       BlocProvider.of<AccountEditBloc>(context).add(UpdateAccount(
           email: emailController.text,
           firstName: firstNameController.text,
           lastName: lastNameController.text,
-          mobileNumber:phoneController.text,
+          mobileNumber: phoneController.text,
           prefContactMethod: prefContactMethod));
     } catch (error) {
       _showErrorDialog(
@@ -77,7 +77,8 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
       if (state is LoadingAccount) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Account', style:  Theme.of(context).textTheme.headline6),
+            title: Text('Edit Account',
+                style: Theme.of(context).textTheme.headline6),
             leading: Builder(
               builder: (BuildContext context) {
                 return TextButton(
@@ -96,12 +97,12 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
             leadingWidth: 100,
           ),
           body: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                //minHeight: 50.0,
-                maxWidth: 500.0,
-              ),
-              child: Column(
+              child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              //minHeight: 50.0,
+              maxWidth: 500.0,
+            ),
+            child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -113,7 +114,8 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
       } else if (state is AccountLoadError) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Account', style:  Theme.of(context).textTheme.headline6),
+            title: Text('Edit Account',
+                style: Theme.of(context).textTheme.headline6),
             leading: Builder(
               builder: (BuildContext context) {
                 return TextButton(
@@ -131,25 +133,26 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
             ),
             leadingWidth: 100,
           ),
-          body:ConstrainedBox(
-      constraints: const BoxConstraints(
-      //minHeight: 50.0,
-      maxWidth: 500.0,
-      ),
-      child: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                      "Error loading account details. Try logging out and back in."),
-                ]),
-          )),
+          body: ConstrainedBox(
+              constraints: const BoxConstraints(
+                //minHeight: 50.0,
+                maxWidth: 500.0,
+              ),
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                          "Error loading account details. Try logging out and back in."),
+                    ]),
+              )),
         );
       } else {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Account', style:  Theme.of(context).textTheme.headline6),
+            title: Text('Edit Account',
+                style: Theme.of(context).textTheme.headline6),
             leading: Builder(
               builder: (BuildContext context) {
                 return TextButton(
@@ -184,12 +187,12 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
             ],
           ),
           body: Center(
-            child:ConstrainedBox(
-      constraints: const BoxConstraints(
-      //minHeight: 50.0,
-      maxWidth: 500.0,
-      ),
-      child: ListView(children: [
+              child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              //minHeight: 50.0,
+              maxWidth: 500.0,
+            ),
+            child: ListView(children: [
               Center(
                   child: Padding(
                       child: Text('Create a new account using your email'),
