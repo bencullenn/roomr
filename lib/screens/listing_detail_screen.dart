@@ -57,19 +57,6 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
     }
 
     if (account != null) {
-      if (kIsWeb) {
-        if (account.prefContactMethod == 'Email') {
-          _showContactDialog(
-              "Contact via Email",
-              "You can contact this seller by emailing them at " +
-                  account.email);
-        } else {
-          _showContactDialog(
-              "Contact via Text",
-              "You can contact this seller by texting them at " +
-                  account.mobileNumber);
-        }
-      } else {
         if (account.prefContactMethod == 'Email') {
           final Uri emailLaunchUri = Uri(
             scheme: 'mailto',
@@ -85,12 +72,11 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
         } else if (account.prefContactMethod == 'Phone Call' ||
             account.prefContactMethod == 'Text-Message') {
           _sendSMS("I saw your listing on Roomr. Is it still available?",
-              [account.mobileNumber]);
+              [account.mobileNumber.substring(1)]);
         } else {
           _showErrorDialog("Contact Seller Error",
               "There was an error getting the seller's information");
         }
-      }
     } else {
       _showErrorDialog("Contact Seller Error",
           "There was an error getting the seller's information");
@@ -398,41 +384,6 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
                   ]),
                 ),
               )));
-  }
-
-  Future _showReportDialog() async {
-    List<String> optionList = ['Looks Like Spam', 'Offensive Content', 'Other'];
-
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Report Post Reason'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context, null);
-                },
-                child: Text('Cancel'),
-              ),
-            ],
-            content: Container(
-              width: double.minPositive,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: optionList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(optionList[index]),
-                    onTap: () {
-                      Navigator.pop(context, optionList[index]);
-                    },
-                  );
-                },
-              ),
-            ),
-          );
-        });
   }
 
 

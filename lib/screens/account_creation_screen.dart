@@ -27,16 +27,8 @@ class _AccountCreationScreenState extends State<AccountCreationScreen> {
   bool passwordVisible = false;
   bool passwordConfirmVisible = false;
 
-  //PhoneNumberUtil phoneUtil = PhoneNumberUtil();
-  //RegionInfo region = RegionInfo(name: "United States", code: "US", prefix: 1);
   String referralMethod = "N/A";
   late TextEditingController phoneNumberController = TextEditingController();
-
-  _AccountCreationScreenState() {
-    /*phoneNumberController = PhoneNumberEditingController.fromValue(
-        phoneUtil, phoneNumberController.value,
-        regionCode: region.code, behavior: PhoneInputBehavior.strict);*/
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +46,6 @@ class _AccountCreationScreenState extends State<AccountCreationScreen> {
         } else if (state is SignUpSuccess) {
           Navigator.pop(context);
           print('State is sign up success');
-          //_showSuccessDialog('Sign Up Success', "Sign up was successful");
           if (authSettings.returnScreen == null) {
             if (authSettings.destinationScreen != null) {
               Get.toNamed(authSettings.destinationScreen!);
@@ -342,8 +333,8 @@ class _AccountCreationScreenState extends State<AccountCreationScreen> {
 
   void _createAccount() async {
     try {
-      /*PhoneNumber phoneNumber = await PhoneNumberUtil().parse("+1" +
-          phoneNumberController.text.replaceAll(new RegExp(r'[^0-9]'), ''));*/
+      /*String phoneNumber =
+          await _phoneController.text.replaceAll(new RegExp(r'[^0-9]'), '');*/
       BlocProvider.of<SignUpBloc>(context).add(SignUpEmail(
           emailController.text,
           passwordController.text,

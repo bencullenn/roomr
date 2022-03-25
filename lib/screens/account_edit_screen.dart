@@ -25,11 +25,13 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
 
   void _updateAccount() async {
     try {
+      String phoneNumber =
+      await phoneController.text.replaceAll(new RegExp(r'[^0-9]'), '');
       BlocProvider.of<AccountEditBloc>(context).add(UpdateAccount(
           email: emailController.text,
           firstName: firstNameController.text,
           lastName: lastNameController.text,
-          mobileNumber: phoneController.text,
+          mobileNumber:phoneController.text,
           prefContactMethod: prefContactMethod));
     } catch (error) {
       _showErrorDialog(
@@ -377,7 +379,7 @@ class _AccountEditScreenState extends State<AccountEditScreen> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return LoadingDialogWidget("Updating Listing");
+          return LoadingDialogWidget("Updating Account");
         });
   }
 }

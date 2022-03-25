@@ -90,4 +90,9 @@ class Listing {
       Timestamp.fromMillisecondsSinceEpoch(int);
 
   static int _toJson(Timestamp time) => time.millisecondsSinceEpoch;
+
+  @override
+  String toString() {
+    return 'Listing{photos: $photos, formattedAddress: $formattedAddress, street: $street, city: $city, state: $state, zipCode: $zipCode, incentive: $incentive, roomType: $roomType, description: $description, dateAvailable: $dateAvailable, parkingType: $parkingType, contractType: $contractType, laundryType: $laundryType, hasWifi: $hasWifi, isFurnished: $isFurnished, rent: $rent, utilities: $utilities, bedroomCount: $bedroomCount, bathroomCount: $bathroomCount, petsAllowed: $petsAllowed, hasGym: $hasGym, hasPool: $hasPool, hasHotTub: $hasHotTub, byuIApproved: $byuIApproved, byuHApproved: $byuHApproved, byuPApproved: $byuPApproved, hasDishwasher: $hasDishwasher, hasAC: $hasAC, isPremiumListing: $isPremiumListing, createdDate: $createdDate, dateLastModified: $dateLastModified, ownerUid: $ownerUid, attachedPosts: $attachedPosts, status: $status, instantNotify: $instantNotify}';
+  }
 }

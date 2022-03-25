@@ -6,4 +6,9 @@ class EditListingArguments {
   final String popUntilScreen;
 
   EditListingArguments(this.listingId, this.listingData, this.popUntilScreen);
+
+  @override
+  String toString() {
+    return 'EditListingArguments{listingId: $listingId, listingData: $listingData, popUntilScreen: $popUntilScreen}';
+  }
 }

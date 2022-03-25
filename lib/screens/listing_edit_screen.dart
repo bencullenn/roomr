@@ -37,17 +37,14 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
   Place? listingAddress;
   TextEditingController addressController = new TextEditingController();
   String popUntilScreen = "/";
-  late final Place defaultPlace = Get.find();
 
   // ignore: non_constant_identifier_names
-  bool BYUApproved = false;
   bool hasAC = false;
   bool hasHotTub = false;
   bool hasPool = false;
   bool hasGym = false;
   bool hasDishwasher = false;
   bool hasWifi = false;
-  bool instantNotify = false;
   bool isFurnished = false;
   bool petsAllowed = false;
   List<String> roomOptions = ['Shared Room', 'Private Room', 'Entire Unit'];
@@ -90,8 +87,7 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as EditListingArguments;
+    final args = Get.arguments;
 
     _updateDetails(args);
 
@@ -655,16 +651,6 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
                         )),
                     Padding(
                         child: CheckboxWidget(
-                            title: 'Instant Notify',
-                            updateFunction: (value) {
-                              setState(() {
-                                this.instantNotify = value;
-                              });
-                            },
-                            initialValue: this.instantNotify),
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10)),
-                    Padding(
-                        child: CheckboxWidget(
                             title: 'Air Conditioning',
                             updateFunction: (value) {
                               setState(() {
@@ -795,7 +781,6 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
             laundryType: laundryType,
             hasWifi: hasWifi,
             hasDishwasher: hasDishwasher,
-            instantNotify: instantNotify,
             isFurnished: isFurnished,
             hasAC: hasAC,
             byuIdahoApproved: false,
@@ -819,9 +804,30 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
 
   void _updateDetails(EditListingArguments args) {
     print("Pop screen:" + args.popUntilScreen);
+    print("Ags:" + args.toString());
     if (dataUpdated == false) {
       this.description = args.listingData.description;
       this.listingId = args.listingId;
+      this.hasAC =  args.listingData.hasAC;
+      this.hasHotTub =  args.listingData.hasHotTub;
+      this.hasPool =  args.listingData.hasPool;
+      this.hasGym =  args.listingData.hasGym;
+      this.hasDishwasher =  args.listingData.hasDishwasher;
+      this.hasWifi =  args.listingData.hasWifi;
+      this.isFurnished =  args.listingData.isFurnished;
+      this.petsAllowed =  args.listingData.petsAllowed;
+      this.roomType =  args.listingData.roomType;
+      this.parkingType =  args.listingData.parkingType;
+      this.contractType =  args.listingData.contractType;
+      this.laundryType =  args.listingData.laundryType;
+      this.address =  args.listingData.formattedAddress;
+      addressController.text =  args.listingData.formattedAddress;
+      this.rent =  args.listingData.rent.toString();
+      this.utilities =  args.listingData.utilities.toString();
+      this.incentive =  args.listingData.incentive;
+      this.bathAmt =  args.listingData.bathroomCount.toString();
+      this.bedAmt =  args.listingData.bedroomCount.toString();
+      this.availableDate =  args.listingData.dateAvailable.toDate();
       this.listingStatus = args.listingData.status;
       this.popUntilScreen = args.popUntilScreen;
       this.oldImageLinks = args.listingData.photos.cast<String>();
@@ -834,7 +840,8 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: availableDate,
-      firstDate: DateTime.now(),
+      firstDate:DateTime(
+          DateTime.now().year - 1, DateTime.now().month, DateTime.now().day) ,
       lastDate: DateTime(
           DateTime.now().year + 1, DateTime.now().month, DateTime.now().day),
     );
@@ -1049,7 +1056,7 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Okay'),
+              child: const Text('Dismiss'),
               onPressed: () {
                 BlocProvider.of<HomeFeedBloc>(context)
                     .add(LoadFeaturedListings());
@@ -1081,7 +1088,7 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Okay'),
+              child: const Text('Dismiss'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
