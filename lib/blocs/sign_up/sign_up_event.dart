@@ -2,7 +2,8 @@ part of 'sign_up_bloc.dart';
 
 @immutable
 abstract class SignUpEvent {}
-class SignUpEmail extends SignUpEvent{
+
+class SignUpEmail extends SignUpEvent {
   final String email;
   final String password;
   final String firstName;
@@ -12,14 +13,16 @@ class SignUpEmail extends SignUpEvent{
   final String referMethod;
   final String otherReferMethodDescription;
 
-   SignUpEmail(this.email, this.password, this.firstName, this.lastName,
-      this.mobileNumber, this.prefContactMethod, this.referMethod, this.otherReferMethodDescription);
+  SignUpEmail(this.email, this.password, this.firstName, this.lastName,
+      this.mobileNumber, this.prefContactMethod, this.referMethod,
+      this.otherReferMethodDescription);
 
   @override
-  List<Object> get props => [email, password, firstName, lastName, mobileNumber, prefContactMethod];
+  List<Object> get props =>
+      [email, password, firstName, lastName, mobileNumber, prefContactMethod];
 
   @override
   String toString() => 'SignUpEmail { Email: $email }';
 }
 
-class SignOut extends SignUpEvent{}
+class SignOut extends SignUpEvent {}

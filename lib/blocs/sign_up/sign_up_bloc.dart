@@ -8,6 +8,7 @@ import 'package:roomr/services/auth_service.dart';
 import 'package:roomr/services/data_service.dart';
 
 part 'sign_up_event.dart';
+
 part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {

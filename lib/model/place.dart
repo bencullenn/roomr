@@ -7,17 +7,22 @@ class Place {
   final String vicinity;
   final Address address;
 
-  Place({required this.geometry, required this.name, required this.vicinity, required this.address});
+  Place(
+      {required this.geometry,
+      required this.name,
+      required this.vicinity,
+      required this.address});
 
   factory Place.fromJson(Map<String, dynamic> parsedJson) {
     return Place(
         geometry: Geometry.fromJson(parsedJson['geometry']),
         name: parsedJson['formatted_address'],
         vicinity: parsedJson['vicinity'],
-        address: Address.fromJson(parsedJson['address_components'])
-    );
+        address: Address.fromJson(parsedJson['address_components']));
   }
 
   @override
-  String toString() => 'Place { Name: $name, Address: $address}';
+  String toString() {
+    return 'Place{geometry: $geometry, name: $name, vicinity: $vicinity, address: $address}';
+  }
 }

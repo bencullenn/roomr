@@ -12,4 +12,9 @@ class Geometry {
   factory Geometry.fromJson( Map<String, dynamic> json ) => _$GeometryFromJson(json);
 
   Map<String, dynamic> toJson() => _$GeometryToJson(this);
+
+  @override
+  String toString() {
+    return 'Geometry{location: $location}';
+  }
 }

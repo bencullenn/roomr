@@ -1,37 +1,35 @@
 import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ListingFilterSettings{
-  ListingFilterSettings({
-    this.minPrice,
-    this.maxPrice,
-    this.hasAirConditioning,
-    this.petsAllowed,
-    this.hasWifi,
-    this.hasDishwasher,
-    this.isFurnished,
-    this.laundryType,
-    this.hasPool,
-    this.hasHotTub,
-    this.hasGym,
-    this.roomType,
-    this.contractType,
-    this.parkingType,
-    this.startAvailabilityDate,
-    this.endAvailabilityDate,
-    this.bedroomAmount,
-    this.bathroomAmount,
-    this.anyDate
-}){
-    if(hasAirConditioning == false &&
-    petsAllowed == false &&
-    hasDishwasher == false &&
+class ListingFilterSettings {
+  ListingFilterSettings(
+      {this.minPrice,
+      this.maxPrice,
+      this.hasAirConditioning,
+      this.petsAllowed,
+      this.hasWifi,
+      this.hasDishwasher,
+      this.isFurnished,
+      this.laundryType,
+      this.hasPool,
+      this.hasHotTub,
+      this.hasGym,
+      this.roomType,
+      this.contractType,
+      this.parkingType,
+      this.startAvailabilityDate,
+      this.endAvailabilityDate,
+      this.bedroomAmount,
+      this.bathroomAmount,
+      this.anyDate}) {
+    if (hasAirConditioning == false &&
+        petsAllowed == false &&
+        hasDishwasher == false &&
         isFurnished == false &&
         hasWifi == false &&
-    hasPool == false &&
-    hasHotTub == false &&
-    hasGym == false
-    ){
+        hasPool == false &&
+        hasHotTub == false &&
+        hasGym == false) {
       this.amenitiesFiltersDisabled = true;
     } else {
       this.amenitiesFiltersDisabled = false;
@@ -60,7 +58,8 @@ class ListingFilterSettings{
   final bool? anyDate;
 
   @override
-  String toString() => 'ListingFilterSettings { Amenities filters disabled: $amenitiesFiltersDisabled, Min Price: $minPrice, '
+  String toString() =>
+      'ListingFilterSettings { Amenities filters disabled: $amenitiesFiltersDisabled, Min Price: $minPrice, '
       'Max Price: $maxPrice, Has AC: $hasAirConditioning, Pets allowed: $petsAllowed, Has Wifi: $hasWifi,  Had Dishwasher: $hasDishwasher,  '
       'Has Pool: $hasPool, Has Hot Tub: $hasHotTub, Has Gym: $hasGym, Room Type: $roomType, Contract Type: $contractType, is Furnished: $isFurnished, '
       'Parking Type: $parkingType, Start Availability Date: $startAvailabilityDate, End Availability Date: $endAvailabilityDate,'

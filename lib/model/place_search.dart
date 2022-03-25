@@ -10,4 +10,9 @@ class PlaceSearch {
       placeId: json['place_id'],
     );
   }
+
+  @override
+  String toString() {
+    return 'PlaceSearch{description: $description, placeId: $placeId}';
+  }
 }
