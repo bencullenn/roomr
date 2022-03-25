@@ -5,12 +5,6 @@ import 'package:roomr/model/account.dart';
 import 'package:roomr/services/data_service.dart';
 import 'package:roomr/global_state/auth_state.dart';
 
-/// Thrown if during the sign up process if a failure occurs.
-class SignUpFailure implements Exception {}
-
-/// Thrown during the login process if a failure occurs.
-class LogInWithEmailAndPasswordFailure implements Exception {}
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late final StreamSubscription<User?> _authSubscription;
@@ -20,8 +14,9 @@ class AuthService {
   User? anonUser;
   bool initialLogin = true;
 
-  AuthService(){
-    _authSubscription = FirebaseAuth.instance.authStateChanges().listen(_onUserChanged);
+  AuthService() {
+    _authSubscription =
+        FirebaseAuth.instance.authStateChanges().listen(_onUserChanged);
   }
 
   Stream<User?> getUserStream() {
@@ -35,8 +30,7 @@ class AuthService {
 
   void _onUserChanged(User? user) async {
     if (user != null) {
-      Account? account =
-          await dataService.getAccountForUserId(user.uid);
+      Account? account = await dataService.getAccountForUserId(user.uid);
       print("Found Account:" + account.toString());
       if (account != null) {
         authState.isAuthenticated = true;
@@ -51,8 +45,8 @@ class AuthService {
   Future<String> signUpWithEmail(String email, String password) async {
     try {
       //await deleteAnonUser();
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       currentUser = _auth.currentUser;
       authState.currentUser = _auth.currentUser;
       authState.isAuthenticated = true;
@@ -74,8 +68,7 @@ class AuthService {
   Future<String> logInWithEmail(String email, String password) async {
     try {
       //await deleteAnonUser();
-      await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       currentUser = _auth.currentUser;
       authState.currentUser = _auth.currentUser;
       authState.isAuthenticated = true;
@@ -99,8 +92,8 @@ class AuthService {
       String? email,
       String? mobileNumber,
       String? prefContactMethod,
-        String? referMethod,
-        String? otherReferMethodDescription}) async {
+      String? referMethod,
+      String? otherReferMethodDescription}) async {
     Account? a;
     if (currentUser != null) {
       print("Current user is not null");
@@ -125,7 +118,8 @@ class AuthService {
 
   Future<String> resetPassword(String email) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email, actionCodeSettings: null);
+      await _auth.sendPasswordResetEmail(
+          email: email, actionCodeSettings: null);
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return e.code;

@@ -32,8 +32,6 @@ class DataService {
             toFirestore: (account, _) => account.toJson(),
           );
 
-
-
   ///Listing Functions
   Future<String> uploadListing({
     List<XFile>? imageMobileFileList,
@@ -73,7 +71,7 @@ class DataService {
               photos: photoLinks,
               formattedAddress: place.name,
               street:
-              place.address.streetNumber + ' ' + place.address.streetName,
+                  place.address.streetNumber + ' ' + place.address.streetName,
               city: place.address.city,
               state: place.address.state,
               zipCode: place.address.zipCode,
@@ -596,7 +594,6 @@ class DataService {
         .get()
         .then((snapshot) => snapshot.docs);
   }
-
 
   Future<List<QueryDocumentSnapshot<Listing>>> getListingsForUserId(
       {String userId = ''}) async {
