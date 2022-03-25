@@ -88,8 +88,9 @@ class _ListingEditScreenState extends State<ListingEditScreen> {
   @override
   Widget build(BuildContext context) {
     final args = Get.arguments;
-
-    _updateDetails(args);
+    if(args != null){
+      _updateDetails(args);
+    }
 
     return BlocConsumer<ListingEditBloc, ListingEditState>(
         listener: (context, state) {

@@ -29,7 +29,7 @@ class ListingEditBloc extends Bloc<ListingEditEvent, ListingEditState> {
         emit(ListingEditInitial());
       } else {
         emit(AddressLoadSuccessEditing(
-            await placesService.getCityAutocomplete(event.query)));
+            await placesService.getAddressAutocomplete(event.query)));
       }
     });
 
