@@ -47,5 +47,11 @@
     <string>Allow access to camera to capture photos for your listing</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Allow access to your photo library so you can upload them to your listing</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>https</string>
+      <string>http</string>
+      <string>mailto</string>
+    </array>
 </dict>
 </plist>
